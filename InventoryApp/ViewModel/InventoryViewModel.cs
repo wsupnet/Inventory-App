@@ -1,12 +1,13 @@
-﻿using System;
+﻿using InventoryApp.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace InventoryApp.Models
+namespace InventoryApp.ViewModel
 {
-    public class Inventory
+    public class InventoryViewModel
     {
         public int ID { get; set; }
 
@@ -21,7 +22,7 @@ namespace InventoryApp.Models
 
         public int Qty { get; set; }
 
-        public virtual Store Stores { get; set; }
+        public string Store { get; set; }
 
         //[Range(0, 999)]
         [Required]

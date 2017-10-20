@@ -1,13 +1,14 @@
-﻿using System;
+﻿using InventoryApp.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace InventoryApp.Models
+namespace InventoryApp.ViewModel
 {
-    public class Store
+    public class StoreViewModel
     {
         public int ID { get; set; }
 
@@ -18,21 +19,11 @@ namespace InventoryApp.Models
         public string Address { get; set; }
 
         public bool IsActive { get; set; }
-
-        [Required]
+        
         public DateTime OpenDate { get; set; }
 
-        public TimeSpan Open { get; set; }
+        public int EmployeeID { get; set; }
 
-        public TimeSpan Close { get; set; }
-
-        public int EmployeeID { get; set; } 
-
-        [ForeignKey("EmployeeID")]
-        public virtual Employee employee { get; set; }
-
-        [Required]
-        [Range(0, 5)]
-        public int Rating { get; set; }
+        public string Employee  { get; set; }
     }
 }

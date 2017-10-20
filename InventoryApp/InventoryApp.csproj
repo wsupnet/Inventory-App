@@ -152,7 +152,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoriesController.cs" />
     <Compile Include="Controllers\EmployeeTypeController.cs" />
+    <Compile Include="Controllers\InventoryViewController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
+    <Compile Include="Controllers\StoreViewModelController.cs" />
     <Compile Include="Data\InventoryContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -229,18 +231,31 @@
     <Compile Include="Migrations\201709302202017_AddedIsActiveToEmployee.Designer.cs">
       <DependentUpon>201709302202017_AddedIsActiveToEmployee.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710180225253_Fix.cs" />
+    <Compile Include="Migrations\201710180225253_Fix.Designer.cs">
+      <DependentUpon>201710180225253_Fix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710200028359_AddedRatingToStore.cs" />
+    <Compile Include="Migrations\201710200028359_AddedRatingToStore.Designer.cs">
+      <DependentUpon>201710200028359_AddedRatingToStore.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Inventory.cs" />
     <Compile Include="Models\LK_EmployeeType.cs" />
     <Compile Include="Models\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\InventoryViewModel.cs" />
+    <Compile Include="ViewModel\StoreViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\stars.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\jquery-ui-timepicker-addon.css" />
     <Content Include="Content\jquery-ui-timepicker-addon.min.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -287,7 +302,9 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\Site.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
@@ -303,6 +320,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\custom-form.js" />
     <Content Include="Scripts\i18n\jquery-ui-timepicker-addon-i18n.js" />
     <Content Include="Scripts\i18n\jquery-ui-timepicker-addon-i18n.min.js" />
     <Content Include="Scripts\i18n\jquery-ui-timepicker-af.js" />
@@ -358,6 +376,8 @@
     <Content Include="Scripts\jquery-ui-sliderAccess.js" />
     <Content Include="Scripts\jquery-ui-timepicker-addon.js" />
     <Content Include="Scripts\jquery-ui-timepicker-addon.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -401,6 +421,8 @@
     <Content Include="Views\EmployeeType\Details.cshtml" />
     <Content Include="Views\EmployeeType\Edit.cshtml" />
     <Content Include="Views\EmployeeType\Index.cshtml" />
+    <Content Include="Views\StoreViewModel\Index.cshtml" />
+    <Content Include="Views\InventoryView\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -462,6 +484,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709302202017_AddedIsActiveToEmployee.resx">
       <DependentUpon>201709302202017_AddedIsActiveToEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710180225253_Fix.resx">
+      <DependentUpon>201710180225253_Fix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710200028359_AddedRatingToStore.resx">
+      <DependentUpon>201710200028359_AddedRatingToStore.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

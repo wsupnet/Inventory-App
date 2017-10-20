@@ -6,8 +6,12 @@
 
 <h2>Create</h2>
 
+@*contains Bootstrap classes*@
+<div class="alert alert-success" role="alert" style="display:none;" id="StatusMessage"></div>
 
-@using (Html.BeginForm()) 
+@*@using (Html.BeginForm()) *@
+@using (Ajax.BeginForm("CreateAjax", "Stores", new AjaxOptions { HttpMethod = "POST", OnSuccess = "onAjaxRequestSuccess" },
+                                                        new { @id = "AjaxformId", @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     
@@ -81,6 +85,14 @@
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rating, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Rating, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Create" class="btn btn-default" />
@@ -96,6 +108,8 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/custom-form.js")
+    
 <script type="text/javascript">
     $(function () {
         $('.datepicker').datetimepicker();

@@ -50,7 +50,7 @@ namespace InventoryApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Description,Address,IsActive,OpenDate,Open,Close,EmployeeID")] Store store)
+        public ActionResult Create([Bind(Include = "ID,Name,Description,Address,IsActive,OpenDate,Open,Close,EmployeeID,Rating")] Store store)
         {
             if (ModelState.IsValid)
             {
@@ -61,6 +61,35 @@ namespace InventoryApp.Controllers
 
             return View(store);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateAjax([Bind(Include = "ID,Name,Description,Address,IsActive,OpenDate,Open,Close,EmployeeID,Rating")] Store store)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Stores.Add(store);
+                db.SaveChanges();
+
+                return this.Json(new
+                {
+                    EnableSuccess = true,
+                    SuccessTitle = "Success",
+                    SuccessMsg = "Success"
+                });
+            }
+            else
+            {
+                return this.Json(new
+                {
+                    EnableError = true,
+                    ErrorTitle = "Error",
+                    ErrorMsg = "Something goes wrong, please try again later"
+                });
+            }
+
+        }
+
 
         // GET: Stores/Edit/5
         public ActionResult Edit(int? id)
