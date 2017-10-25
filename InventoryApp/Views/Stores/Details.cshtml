@@ -1,7 +1,10 @@
-﻿@model InventoryApp.Models.Store
+﻿@*@model InventoryApp.Models.Store*@
+@model InventoryApp.ViewModel.EmployeesDetailsViewModel
+
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Details</h2>
@@ -11,80 +14,90 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Store.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Store.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.Store.Description)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.DisplayFor(model => model.Store.Description)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayNameFor(model => model.Store.Address)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Address)
+            @Html.DisplayFor(model => model.Store.Address)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IsActive)
+            @Html.DisplayNameFor(model => model.Store.IsActive)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IsActive)
+            @Html.DisplayFor(model => model.Store.IsActive)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.OpenDate)
+            @Html.DisplayNameFor(model => model.Store.OpenDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.OpenDate)
+            @Html.DisplayFor(model => model.Store.OpenDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Open)
+            @Html.DisplayNameFor(model => model.Store.Open)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Open)
+            @Html.DisplayFor(model => model.Store.Open)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Close)
+            @Html.DisplayNameFor(model => model.Store.Close)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Close)
+            @Html.DisplayFor(model => model.Store.Close)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EmployeeID)
+            @Html.DisplayNameFor(model => model.Store.EmployeeID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EmployeeID)
+            @Html.DisplayFor(model => model.Store.EmployeeID)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.employee.FirstName)
+            @Html.DisplayNameFor(model => model.Store.employee.FirstName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.employee.FirstName)
+            @Html.DisplayFor(model => model.Store.employee.FirstName)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Store.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+
+<p>
+    @Html.ActionLink("Create New", "../Inventories/Create", new { id = Model.Store.ID })
+</p>
+
+
+<div>
+    @Html.Partial("_InventoryList", Model.Inventories)
+</div>

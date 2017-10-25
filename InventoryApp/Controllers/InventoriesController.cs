@@ -46,11 +46,12 @@ namespace InventoryApp.Controllers
         }
 
         // GET: Inventories/Create
-        public ActionResult Create(int storeId)
+        public ActionResult Create(int id)
         {
             Inventory model = new Inventory();
             model.Stores = new Store();
-            model.Stores.ID = storeId;
+            model.Stores.ID = id;
+            model.Stores.Name = db.Stores.Where(x => x.ID == id).FirstOrDefault().Name;
             return View(model);
         }
 

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using InventoryApp.Data;
 using InventoryApp.Models;
+using InventoryApp.ViewModel;
 
 namespace InventoryApp.Controllers
 {
@@ -24,16 +25,21 @@ namespace InventoryApp.Controllers
         // GET: Stores/Details/5
         public ActionResult Details(int? id)
         {
+            EmployeesDetailsViewModel model = new EmployeesDetailsViewModel();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Store store = db.Stores.Find(id);
-            if (store == null)
+            //Store store = db.Stores.Find(id);
+            model.Store = db.Stores.Find(id);//Find Stores
+            model.Inventories = db.Inventories.Where(x => x.Stores.ID == id).ToList(); //Find all inventories for a store
+
+            if (model.Store == null)
             {
                 return HttpNotFound();
             }
-            return View(store);
+            return View(model);
         }
 
         // GET: Stores/Create
@@ -122,7 +128,7 @@ namespace InventoryApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Description,Address,IsActive,OpenDate,Open,Close,EmployeeID")] Store store)
+        public ActionResult Edit([Bind(Include = "ID,Name,Description,Address,IsActive,OpenDate,Open,Close,EmployeeID,Rating")] Store store)
         {
             if (ModelState.IsValid)
             {
