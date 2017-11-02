@@ -97,7 +97,15 @@
     @Html.ActionLink("Create New", "../Inventories/Create", new { id = Model.Store.ID })
 </p>
 
-
-<div>
-    @Html.Partial("_InventoryList", Model.Inventories)
+<div id="PartialRender">  
+   @* @Html.Partial("_InventoryList", Model.Inventories)*@
 </div>
+
+<script type="test/javascript">
+
+    $(document).ready(function () {
+
+
+    });
+
+</script>

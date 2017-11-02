@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using InventoryApp.Data;
 using InventoryApp.Models;
 using InventoryApp.ViewModel;
+using System.Threading.Tasks;
 
 namespace InventoryApp.Controllers
 {
@@ -41,6 +42,14 @@ namespace InventoryApp.Controllers
             }
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<ActionResult> GetPartialView(int Id)
+        {
+            var model = db.Inventories.Where(x => x.Stores.ID == Id).ToList(); //Find all inventories for a store
+            return PartialView("_InventoryList", model);
+        }
+
 
         // GET: Stores/Create
         public ActionResult Create()
