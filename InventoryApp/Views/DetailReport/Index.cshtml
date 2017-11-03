@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View</h2>
+<p>SELECT A STORE:</p>
+@Html.DropDownList("Id", new SelectList(ViewBag.Stores, "Id", "Name"), new { @class = "storesddl btn btn-primary dropdown-toggle" }) 
+
+<div id="PartialRender"></div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+
+            //We listen for any changes one the storesddl drop down list 
+            $(".storesddl").change(function () {
+                var storeId = $(this).val();
+                LoadData(storeId)
+            });
+
+            //We make the partial load into a function we can reuse multiple times 
+            function LoadData(storeId) {
+                //console.log("The store selected is: " + storeId);
+
+                if (storeId > 0) {
+                    $("#PartialRender").load(
+                        '@(Url.Action("GetPartialView", "Stores",null, Request.Url.Scheme))?Id=' + storeId
+                    );
+                } else {
+                    $("#PartialRender").html("<div>Sorry, no results found. Please select a different store. </div>");
+                }
+            }
+        });
+    </script>
+}

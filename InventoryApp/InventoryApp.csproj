@@ -148,6 +148,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DetailReportController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoriesController.cs" />
@@ -429,6 +430,12 @@
     <Content Include="Views\StoreViewModel\Index.cshtml" />
     <Content Include="Views\InventoryView\Index.cshtml" />
     <Content Include="Views\Shared\_InventoryList.cshtml" />
+    <Content Include="Views\DetailReport\Index.cshtml" />
+    <Content Include="Views\Shared\_NoResultsFound.cshtml" />
+    <Content Include="Views\Shared\_EmployeeList.cshtml" />
+    <Content Include="Views\DetailReport\Employees.cshtml" />
+    <Content Include="Views\Shared\_StoresList.cshtml" />
+    <Content Include="Views\DetailReport\Stores.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

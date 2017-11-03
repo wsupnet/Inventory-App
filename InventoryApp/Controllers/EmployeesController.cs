@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using InventoryApp.Data;
 using InventoryApp.Models;
+using System.Threading.Tasks;
 
 namespace InventoryApp.Controllers
 {
@@ -121,6 +122,20 @@ namespace InventoryApp.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public async Task<ActionResult> GetPartialView(int Id)
+        {
+            var model = db.Employees.Where(x => x.StoreID == Id).ToList(); //Find all inventories for a store
+
+            if (model.Count() > 0)
+            {
+                return PartialView("_EmployeeList", model);
+            }
+
+            return PartialView("_NoResultsFound");
+        }
+
 
         protected override void Dispose(bool disposing)
         {

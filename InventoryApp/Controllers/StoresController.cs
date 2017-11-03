@@ -47,7 +47,27 @@ namespace InventoryApp.Controllers
         public async Task<ActionResult> GetPartialView(int Id)
         {
             var model = db.Inventories.Where(x => x.Stores.ID == Id).ToList(); //Find all inventories for a store
-            return PartialView("_InventoryList", model);
+
+            if (model.Count() > 0)
+            {
+                return PartialView("_InventoryList", model);
+            }
+
+            return PartialView("_NoResultsFound");
+        }
+
+
+        [HttpGet]
+        public async Task<ActionResult> GetPartialStoresView(int Id)
+        {
+            var model = db.Stores.Where(x => x.employee.ID == Id).ToList(); //Find all inventories for a store
+
+            if (model.Count() > 0)
+            {
+                return PartialView("_StoresList", model);
+            }
+
+            return PartialView("_NoResultsFound");
         }
 
 
