@@ -5,6 +5,8 @@
 }
 
 <h2>View</h2>
+@Html.JQueryUI().Datepicker("date").MinDate(DateTime.Today).ShowButtonPanel(true).ChangeYear(true).ChangeMonth(true).NumberOfMonths(2)
+
 <p>SELECT A STORE:</p>
 @Html.DropDownList("Id", new SelectList(ViewBag.Stores, "Id", "Name"), new { @class = "storesddl btn btn-primary dropdown-toggle" }) 
 

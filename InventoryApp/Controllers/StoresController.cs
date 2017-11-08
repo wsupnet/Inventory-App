@@ -57,6 +57,20 @@ namespace InventoryApp.Controllers
         }
 
 
+        //Adding a new ActionResult to return a list of categories
+        public ActionResult SearchCategory(string term)
+        {
+
+            var result = db.Categories
+                .Where(x => x.Name.StartsWith(term))
+                .Select(x => new { label = x.Name, value = x.Id })
+                .ToList();
+            
+            //We must return a JSON String type value to our JQUERYUI Request
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
         [HttpGet]
         public async Task<ActionResult> GetPartialStoresView(int Id)
         {
@@ -85,7 +99,7 @@ namespace InventoryApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Description,Address,IsActive,OpenDate,Open,Close,EmployeeID,Rating")] Store store)
+        public ActionResult Create([Bind(Include = "ID,Name,Description,Address,IsActive,OpenDate,Open,Close,EmployeeID,Rating,CategoryID")] Store store)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +113,7 @@ namespace InventoryApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateAjax([Bind(Include = "ID,Name,Description,Address,IsActive,OpenDate,Open,Close,EmployeeID,Rating")] Store store)
+        public ActionResult CreateAjax([Bind(Include = "ID,Name,Description,Address,IsActive,OpenDate,Open,Close,EmployeeID,Rating,CategoryID")] Store store)
         {
             if (ModelState.IsValid)
             {
@@ -119,7 +133,7 @@ namespace InventoryApp.Controllers
                 {
                     EnableError = true,
                     ErrorTitle = "Error",
-                    ErrorMsg = "Something goes wrong, please try again later"
+                    ErrorMsg = "Something went wrong, please try again later"
                 });
             }
 

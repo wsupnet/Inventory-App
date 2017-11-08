@@ -33,6 +33,17 @@ namespace InventoryApp
                       "~/Content/site.css",
                       "~/Content/themes/base/jquery-ui.css",
                       "~/Content/jquery-ui-timepicker-addon.css"));
+
+            //JQuery Ui
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                "~/Scripts/jquery-ui-{version}.js",
+                "~/Scripts/jquery-ui.unobtrusive-{version}.js"));
+
+            //Theme-base
+            bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
+                "~/Content/themes/base/jquery-ui.core.css",
+                "~/Content/themes/base/jquery-ui.datepicker.css",
+                "~/Content/themes/base/jquery-ui.theme.css"));
         }
     }
 }

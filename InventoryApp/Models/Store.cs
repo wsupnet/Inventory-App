@@ -34,5 +34,10 @@ namespace InventoryApp.Models
         [Required]
         [Range(0, 5)]
         public float Rating { get; set; }
+
+        public int CategoryID { get; set; }
+
+        [ForeignKey("CategoryID")]
+        public virtual StoreCategory category { get; set; }
     }
 }
