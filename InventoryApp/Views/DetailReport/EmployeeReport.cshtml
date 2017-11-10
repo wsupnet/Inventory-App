@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "EmployeeReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>EmployeeReport</h2>
+
+@(Html.EJ().Grid<object>("FlatGrid")
+
+    .Datasource((IEnumerable<object>)ViewBag.datasource)
+
+    .FilterSettings(d => d.FilterType(FilterType.FilterBar))
+
+    .AllowFiltering()
+
+    .AllowSelection()
+
+    .Columns(col =>
+
+    {
+
+        col.Field("FirstName").HeaderText("Search by First Name").TextAlign(TextAlign.Right).Width(75).Add();
+
+        col.Field("LastName").HeaderText("Search by Last Name").TextAlign(TextAlign.Right).Width(80).Add();
+
+        col.Field("IsActive").HeaderText("Search by is active").TextAlign(TextAlign.Right).Width(75).Add();
+
+        col.Field("lk_EmployeeTypes.Name").HeaderText("Search by Position").TextAlign(TextAlign.Right).Width(80).Add();
+
+        col.Field("EmployeeID").HeaderText("Search by EmployeeID").TextAlign(TextAlign.Right).Width(80).Add();
+
+    })
+
+
+    )
+

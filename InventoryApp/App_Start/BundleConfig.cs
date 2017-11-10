@@ -9,15 +9,12 @@ namespace InventoryApp
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/jquery-ui-{version}.js", 
-                        "~/Scripts/jquery-ui-timepicker-addon.js"));
+                        "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*",
                         "~/Scripts/jquery.validate.unobtrusive.js",
-                        "~/Scripts/jquery.unobtrusive-ajax.js"
-                        ));
+                        "~/Scripts/jquery.unobtrusive-ajax.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
@@ -36,8 +33,9 @@ namespace InventoryApp
 
             //JQuery Ui
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                "~/Scripts/jquery-ui.unobtrusive-{version}.js",
                 "~/Scripts/jquery-ui-{version}.js",
-                "~/Scripts/jquery-ui.unobtrusive-{version}.js"));
+                "~/Scripts/jquery-ui-timepicker-addon.js"));
 
             //Theme-base
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
