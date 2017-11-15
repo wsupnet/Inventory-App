@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "InventoryPerStore";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>InventoryPerStore</h2>
+
+@(Html.EJ().Grid<object>("DetailTemplate")
+        .Datasource((IEnumerable<object>)ViewBag.datasourceStores)
+        .DetailsTemplate("#tabGridContents")
+        .ClientSideEvents(eve => { eve.DetailsDataBound("detailGridData"); })
+        .AllowFiltering()
+        .AllowPaging()
+        .Columns(col =>
+        {
+            col.Field("ID").Add();
+            col.Field("Name").Add();
+        })
+
+    )
+
+@section Scripts {
+    
+    <script id="tabGridContents" type="text/x-jsrender">
+    <div class="tabcontrol" id="Test">
+        <ul>
+            <li><a href="#gridTab{{:ID }}">Stock Grid</a></li>
+        </ul>
+        <div id="gridTab{{:ID }}">
+            <div id="detailGrid">
+            </div>
+        </div>
+    </div>
+</script>
+<script src="~/Scripts/jsondata.min.js"></script>
+<script type="text/javascript">
+    function detailGridData(e) {
+
+          var dataSource = @Html.Raw(Json.Encode(@ViewBag.datasourceInventory));
+          var filteredData = e.rowData["ID"];
+          console.log(filteredData);
+          // the datasource "window.ordersView" is referred from jsondata.min.js
+          var data = ej.DataManager(dataSource).executeLocal(ej.Query().where("StoreID", "equal", parseInt(filteredData), true).take(5));
+          e.detailsElement.find("#detailGrid").ejGrid({
+          dataSource: data,
+          columns: [
+                        { field: "StoreID" },
+                        { field: "Name" },
+	               ]
+	     });
+       e.detailsElement.find(".tabcontrol").ejTab();
+}
+</script>
+    
+    
+    }

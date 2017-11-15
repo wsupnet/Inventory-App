@@ -1003,6 +1003,7 @@
     <Content Include="Views\Shared\_StoresList.cshtml" />
     <Content Include="Views\DetailReport\Stores.cshtml" />
     <Content Include="Views\DetailReport\EmployeeReport.cshtml" />
+    <Content Include="Views\DetailReport\InventoryPerStore.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

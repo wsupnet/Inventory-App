@@ -41,5 +41,23 @@ namespace InventoryApp.Controllers
             return View();
         }
 
+        public ActionResult InventoryPerStore()
+        {
+            var DataSourceStores = db.Stores.ToList();
+
+            var DataSourceInventory = from Inventory in db.Inventories
+                                      select new
+                                      {
+                                          StoreID = Inventory.Stores.ID,
+                                          Name = Inventory.Name
+                                      };
+
+            ViewBag.datasourceStores = DataSourceStores;
+            ViewBag.datasourceInventory = DataSourceInventory.ToList();
+
+            return View();
+
+        }
+
     }
 }
