@@ -3,6 +3,12 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    //Building a button for Edit
+    Dictionary<string, object> editButton = new Dictionary<string, object>();
+    editButton.Add("class", "btn-primary");
+
 }
 
 <h2>Index</h2>
@@ -55,3 +61,110 @@
 }
 
 </table>
+
+@(Html.EJ().Grid<object>("FlatGrid")
+
+    .Datasource((IEnumerable<object>)ViewBag.datasource)
+
+    .FilterSettings(d => d.FilterType(FilterType.FilterBar))
+
+    .EditSettings(e => e.AllowEditing().AllowDeleting())
+
+    .AllowPaging()
+
+    .AllowFiltering()
+
+    .AllowSelection()
+
+    .AllowGrouping()
+
+    .Columns(col =>
+
+    {
+
+        col.Field("FirstName").HeaderText("Search by First Name").TextAlign(TextAlign.Right).Width(75).Add();
+
+        col.Field("LastName").HeaderText("Search by Last Name").TextAlign(TextAlign.Right).Width(80).Add();
+
+        col.Field("IsActive").HeaderText("Search by is active").TextAlign(TextAlign.Right).Width(75).Add();
+
+        col.Field("lk_EmployeeTypes.Name").HeaderText("Search by Position").TextAlign(TextAlign.Right).Width(80).Add();
+
+        col.Field("EmployeeID").HeaderText("Search by EmployeeID").TextAlign(TextAlign.Right).Width(80).Add();
+
+        col.HeaderText("Manage Records").Commands(command =>
+        {
+            command.Type("Edit").ButtonOptions(new Syncfusion.JavaScript.Models.ButtonProperties()
+            {
+                Text = "Edit",
+                HtmlAttributes = editButton,
+                Click = "editButton"
+            }).Add();
+
+            command.Type("Details").ButtonOptions(new Syncfusion.JavaScript.Models.ButtonProperties()
+            {
+                Text = "Details",
+                HtmlAttributes = editButton,
+                Click = "detailsButton"
+            }).Add();
+
+            command.Type("Delete").ButtonOptions(new Syncfusion.JavaScript.Models.ButtonProperties()
+            {
+                Text = "Delete",
+                HtmlAttributes = editButton,
+                Click = "deleteButton"
+            }).Add();
+
+        }).Width(85).Add();
+
+    })
+
+
+)
+
+@section Scripts {
+    <script>
+
+        
+
+        function detailsButton(args) {
+            var grid = $("#FlatGrid").data("ejGrid");
+            var recordId = grid.getSelectedRecords()[0].ID;
+            Action("Details", recordId);
+        }
+       
+        function editButton(args) {
+            var grid = $("#FlatGrid").data("ejGrid");
+            var recordId = grid.getSelectedRecords()[0].ID;
+            Action("Edit", recordId);
+            //console.log(JSON.stringify(grid.getSelectedRecords()));
+            //window.location.href = "/Employees/Edit/" + data;
+        }
+
+        function deleteButton(args) {
+            var grid = $("#FlatGrid").data("ejGrid");
+            var recordId = grid.getSelectedRecords()[0].ID;
+            Action("Delete", recordId);
+        }
+
+        function Action(actionType, recordId) {
+            var Action = "Employees";
+            /*switch (actionType) {
+                case "Edit":
+                    url = "/Edit/";
+                    break;
+                case "Details":
+                    url = "/Details/";
+                    break;
+                case "Delete":
+                    url = "/Delete/";
+                    break;
+                default:
+                    break;
+            }*/
+
+            window.location.href = "/" + Action + "/" + actionType + "/" + recordId;
+        }
+
+    </script>
+}

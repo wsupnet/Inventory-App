@@ -19,6 +19,8 @@ namespace InventoryApp.Controllers
         // GET: Employees
         public ActionResult Index()
         {
+            ViewBag.datasource = db.Employees.ToList();
+
             return View(db.Employees.ToList());
         }
 
