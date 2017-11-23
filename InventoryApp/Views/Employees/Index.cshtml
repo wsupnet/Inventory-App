@@ -25,9 +25,6 @@
             @Html.DisplayNameFor(model => model.LastName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EmployeeID)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.IsActive)
         </th>
         <th>
@@ -42,9 +39,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmployeeID)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IsActive)
@@ -62,65 +56,50 @@
 
 </table>
 
-@(Html.EJ().Grid<object>("FlatGrid")
+@(Html.EJ().Grid<InventoryApp.Models.Employee>("FlatGrid")
 
-    .Datasource((IEnumerable<object>)ViewBag.datasource)
+            .Datasource(dataSource => dataSource.URL("/Employees/InlineDataSource")
+                                      .UpdateURL("/Employees/InlineEdit")
+                                      .RemoveURL("/Employees/InlineRemove")
+                                      .InsertURL("/Employees/InlineInsert").Adaptor(AdaptorType.UrlAdaptor))
+            .AllowPaging()
 
-    .FilterSettings(d => d.FilterType(FilterType.FilterBar))
+            .AllowSelection()
 
-    .EditSettings(e => e.AllowEditing().AllowDeleting())
+            .AllowGrouping()
 
-    .AllowPaging()
+            .FilterSettings(d => d.FilterType(FilterType.FilterBar))
 
-    .AllowFiltering()
+            .AllowFiltering()
 
-    .AllowSelection()
+            .EditSettings(e => { e.AllowEditing().EditMode(EditMode.InlineForm).AllowDeleting().ShowDeleteConfirmDialog().AllowAdding(); })
 
-    .AllowGrouping()
-
-    .Columns(col =>
-
-    {
-
-        col.Field("FirstName").HeaderText("Search by First Name").TextAlign(TextAlign.Right).Width(75).Add();
-
-        col.Field("LastName").HeaderText("Search by Last Name").TextAlign(TextAlign.Right).Width(80).Add();
-
-        col.Field("IsActive").HeaderText("Search by is active").TextAlign(TextAlign.Right).Width(75).Add();
-
-        col.Field("lk_EmployeeTypes.Name").HeaderText("Search by Position").TextAlign(TextAlign.Right).Width(80).Add();
-
-        col.Field("EmployeeID").HeaderText("Search by EmployeeID").TextAlign(TextAlign.Right).Width(80).Add();
-
-        col.HeaderText("Manage Records").Commands(command =>
-        {
-            command.Type("Edit").ButtonOptions(new Syncfusion.JavaScript.Models.ButtonProperties()
+            .ToolbarSettings(toolbar =>
             {
-                Text = "Edit",
-                HtmlAttributes = editButton,
-                Click = "editButton"
-            }).Add();
-
-            command.Type("Details").ButtonOptions(new Syncfusion.JavaScript.Models.ButtonProperties()
+                toolbar.ShowToolbar().ToolbarItems(items =>
+                {
+                    items.AddTool(ToolBarItems.Edit);
+                    items.AddTool(ToolBarItems.Delete);
+                    items.AddTool(ToolBarItems.Add);
+                });
+            })
+            .Columns(col =>
             {
-                Text = "Details",
-                HtmlAttributes = editButton,
-                Click = "detailsButton"
-            }).Add();
+                col.Field("ID").HeaderText("Id").IsPrimaryKey(true).Visible(false).Add();
 
-            command.Type("Delete").ButtonOptions(new Syncfusion.JavaScript.Models.ButtonProperties()
-            {
-                Text = "Delete",
-                HtmlAttributes = editButton,
-                Click = "deleteButton"
-            }).Add();
+                col.Field("FirstName").HeaderText("First name").Add();
 
-        }).Width(85).Add();
+                col.Field("LastName").HeaderText("Last name").Add();
 
-    })
+                col.Field("IsActive").HeaderText("Is Active").Add();
 
+                col.Field("LK_EmployeeTypesID").HeaderText("Position").DataSource((IEnumerable<object>)ViewBag.DatasourceEmployeeTypes).EditType(EditingType.Dropdown).Add();
 
+            })
 )
+
+
+
 
 @section Scripts {
     <script>

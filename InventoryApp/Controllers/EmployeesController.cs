@@ -9,6 +9,10 @@ using System.Web.Mvc;
 using InventoryApp.Data;
 using InventoryApp.Models;
 using System.Threading.Tasks;
+using System.Collections;
+using Syncfusion.JavaScript.DataSources;
+using Syncfusion.Linq;
+using Syncfusion.JavaScript;
 
 namespace InventoryApp.Controllers
 {
@@ -16,10 +20,82 @@ namespace InventoryApp.Controllers
     {
         private InventoryContext db = new InventoryContext();
 
+        public class DataResult
+        {
+            public IEnumerable result { get; set; }
+            public int count { get; set; }
+        }
+
+        //Theis method is used to populate the grid
+        public ActionResult InlineDataSource(DataManager dataManager)
+        {
+            //Get the Datasource
+            IEnumerable DataSource = db.Employees;
+
+            //Create the object
+            DataResult result = new DataResult();
+            DataOperations operation = new DataOperations();
+
+            //Populate the objects
+            result.result = DataSource;
+            result.count = result.result.AsQueryable().Count();
+
+            //Creating conditions to check if we are going to skip any records
+            if (dataManager.Skip > 0)
+            {
+                result.result = operation.PerformSkip(result.result, dataManager.Skip);
+            }
+
+            //Check if the user will be taking/removing any objects
+            if (dataManager.Take > 0)
+            {
+                result.result = operation.PerformTake(result.result, dataManager.Take);
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public ActionResult InlineEdit(Employee value)
+        {
+            db.Entry(value).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return Json(value, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public ActionResult InlineRemove(int key)
+        {
+            Employee employee = new Employee();
+            employee = db.Employees.Where(x => x.ID == key).FirstOrDefault();
+
+            db.Entry(employee).State = EntityState.Deleted;
+            db.SaveChanges();
+
+            return Json(key, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult InlineInsert(Employee value)
+        {
+            db.Entry(value).State = EntityState.Added;
+            db.SaveChanges();
+
+            return Json(value, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Employees
         public ActionResult Index()
         {
             ViewBag.datasource = db.Employees.ToList();
+
+            //Create a dropdown for positions
+            ViewBag.DatasourceEmployeeTypes = (from position in db.LK_EmployeeTypes
+                                               select new
+                                               {
+                                                   text = position.Name,
+                                                   value = position.ID
+                                               }).ToList();
 
             return View(db.Employees.ToList());
         }
@@ -137,6 +213,15 @@ namespace InventoryApp.Controllers
 
             return PartialView("_NoResultsFound");
         }
+
+        /*
+         * We are the creating a Dataresult class that will
+         * hold properties. 
+         * first, we get the result which populates the grid.
+         * second, we get the count of records within the row. Pagination
+         */
+
+        
 
 
         protected override void Dispose(bool disposing)
