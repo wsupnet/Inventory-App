@@ -22,7 +22,12 @@ namespace InventoryApp.Models
 
         public int StoreID { get; set; }
 
-        [ForeignKey("LK_EmployeeTypesID")]
-        public virtual LK_EmployeeTypes lk_EmployeeTypes { get; set; }
+        //[ForeignKey("LK_EmployeeTypesID")]
+        //public virtual LK_EmployeeTypes lk_EmployeeTypes { get; set; }
+
+       public int Position { get; set; }
+
+        [ForeignKey("Position")]
+        public virtual Position Positions { get; set; }
     }
 }

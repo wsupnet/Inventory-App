@@ -27,9 +27,6 @@
         <th>
             @Html.DisplayNameFor(model => model.IsActive)
         </th>
-        <th>
-            Position
-        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -42,9 +39,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.lk_EmployeeTypes.Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
@@ -93,7 +87,7 @@
 
                 col.Field("IsActive").HeaderText("Is Active").Add();
 
-                col.Field("LK_EmployeeTypesID").HeaderText("Position").DataSource((IEnumerable<object>)ViewBag.DatasourceEmployeeTypes).EditType(EditingType.Dropdown).Add();
+                col.Field("Positions.Name").HeaderText("Position").DataSource((IEnumerable<object>)ViewBag.DatasourceEmployeeTypes).EditType(EditingType.Dropdown).Add();
 
             })
 )

@@ -1,0 +1,24 @@
+﻿@model IEnumerable<InventoryApp.Models.Schedule>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+@(Html.EJ().Schedule("Schedule1")
+        .Width("100%")
+        .Height("530px")
+        .CurrentDate(DateTime.Now)
+        .AppointmentSettings(fields => fields.Datasource(datasource => datasource.URL("/Schedules/SchedulerDataSource").Adaptor(AdaptorType.UrlAdaptor)
+        .InsertURL("/Schedule/SchedulerAdd").CrudURL("/Schedules/Crud").Adaptor(AdaptorType.UrlAdaptor))
+            .Id("Id")
+            .Subject("Title")
+            .StartTime("Start")
+            .EndTime("End")
+            .Description("Description")
+            .AllDay("IsAllDay")
+            .Recurrence("IsRecurrence")
+            .RecurrenceRule("RecurrenceRule"))
+)

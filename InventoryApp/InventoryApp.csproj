@@ -192,6 +192,7 @@
     <Compile Include="Controllers\InventoriesController.cs" />
     <Compile Include="Controllers\EmployeeTypeController.cs" />
     <Compile Include="Controllers\InventoryViewController.cs" />
+    <Compile Include="Controllers\SchedulesController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\StoreViewModelController.cs" />
     <Compile Include="Data\InventoryContext.cs" />
@@ -290,10 +291,36 @@
     <Compile Include="Migrations\201711080214318_AddedForeignKeyToStoresTable.Designer.cs">
       <DependentUpon>201711080214318_AddedForeignKeyToStoresTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712080128261_AddedPositionClass.cs" />
+    <Compile Include="Migrations\201712080128261_AddedPositionClass.Designer.cs">
+      <DependentUpon>201712080128261_AddedPositionClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712080137229_AddedPositionForeignKeyToEmployee.cs" />
+    <Compile Include="Migrations\201712080137229_AddedPositionForeignKeyToEmployee.Designer.cs">
+      <DependentUpon>201712080137229_AddedPositionForeignKeyToEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712080217081_RemovedLKTable.cs" />
+    <Compile Include="Migrations\201712080217081_RemovedLKTable.Designer.cs">
+      <DependentUpon>201712080217081_RemovedLKTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712080305510_AddedScheduleClass.cs" />
+    <Compile Include="Migrations\201712080305510_AddedScheduleClass.Designer.cs">
+      <DependentUpon>201712080305510_AddedScheduleClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712080328018_AddedMorePropsToScheduleModel.cs" />
+    <Compile Include="Migrations\201712080328018_AddedMorePropsToScheduleModel.Designer.cs">
+      <DependentUpon>201712080328018_AddedMorePropsToScheduleModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712080440301_AddedQuestionMarksToSchedule.cs" />
+    <Compile Include="Migrations\201712080440301_AddedQuestionMarksToSchedule.Designer.cs">
+      <DependentUpon>201712080440301_AddedQuestionMarksToSchedule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Inventory.cs" />
     <Compile Include="Models\LK_EmployeeType.cs" />
+    <Compile Include="Models\Position.cs" />
+    <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Store.cs" />
     <Compile Include="Models\StoreCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1004,6 +1031,7 @@
     <Content Include="Views\DetailReport\Stores.cshtml" />
     <Content Include="Views\DetailReport\EmployeeReport.cshtml" />
     <Content Include="Views\DetailReport\InventoryPerStore.cshtml" />
+    <Content Include="Views\Schedules\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1080,6 +1108,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711080214318_AddedForeignKeyToStoresTable.resx">
       <DependentUpon>201711080214318_AddedForeignKeyToStoresTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712080128261_AddedPositionClass.resx">
+      <DependentUpon>201712080128261_AddedPositionClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712080137229_AddedPositionForeignKeyToEmployee.resx">
+      <DependentUpon>201712080137229_AddedPositionForeignKeyToEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712080217081_RemovedLKTable.resx">
+      <DependentUpon>201712080217081_RemovedLKTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712080305510_AddedScheduleClass.resx">
+      <DependentUpon>201712080305510_AddedScheduleClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712080328018_AddedMorePropsToScheduleModel.resx">
+      <DependentUpon>201712080328018_AddedMorePropsToScheduleModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712080440301_AddedQuestionMarksToSchedule.resx">
+      <DependentUpon>201712080440301_AddedQuestionMarksToSchedule.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

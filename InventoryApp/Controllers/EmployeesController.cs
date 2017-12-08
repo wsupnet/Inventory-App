@@ -58,6 +58,9 @@ namespace InventoryApp.Controllers
 
         public ActionResult InlineEdit(Employee value)
         {
+
+            value = _GetEmployeeByValue(value);
+
             db.Entry(value).State = EntityState.Modified;
             db.SaveChanges();
 
@@ -78,6 +81,8 @@ namespace InventoryApp.Controllers
 
         public ActionResult InlineInsert(Employee value)
         {
+            value = _GetEmployeeByValue(value);
+
             db.Entry(value).State = EntityState.Added;
             db.SaveChanges();
 
@@ -90,11 +95,11 @@ namespace InventoryApp.Controllers
             ViewBag.datasource = db.Employees.ToList();
 
             //Create a dropdown for positions
-            ViewBag.DatasourceEmployeeTypes = (from position in db.LK_EmployeeTypes
+            ViewBag.DatasourceEmployeeTypes = (from position in db.Positions
                                                select new
                                                {
                                                    text = position.Name,
-                                                   value = position.ID
+                                                   value = position.Name
                                                }).ToList();
 
             return View(db.Employees.ToList());
@@ -221,7 +226,20 @@ namespace InventoryApp.Controllers
          * second, we get the count of records within the row. Pagination
          */
 
-        
+        private Employee _GetEmployeeByValue(Employee value)
+        {
+            //We need to create an instance of the class(object) positions
+            //to hold our value
+            Position position = new Position();
+            position = db.Positions.Where(x => x.Name == value.Positions.Name).FirstOrDefault();
+
+            //Lets assign the value to our incoming Employee Model called value
+            value.Positions = position;
+            value.Position = position.Id;
+
+            return value;
+        }
+
 
 
         protected override void Dispose(bool disposing)

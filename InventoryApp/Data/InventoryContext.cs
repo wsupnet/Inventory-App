@@ -24,5 +24,9 @@ namespace InventoryApp.Data
         //Inventory Table to assign to each store individually
         
         public DbSet<StoreCategory> Categories { get; set; }
+
+        public DbSet<Position> Positions { get; set; }
+
+        public DbSet<Schedule> Schedules { get; set; }
     }
 }
